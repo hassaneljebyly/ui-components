@@ -25,58 +25,73 @@ body {
   margin-inline: auto;
 }
 
-.accordion {
-  margin: 1em;
-  border-bottom: 1px solid #787c81;
-}
 
-.accordion__heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-block: .5em;
-  cursor: pointer;
-}
-
-.accordion__title {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-
-
-.accordion__icon>i {
-  rotate: var(--icon-rotate);
-  transition: rotate 150ms ease-in-out;
-}
-
-.accordion__content {
-  overflow: hidden;
-}
-
-.accordion__panel {
+.accordion-1 {
+  --acc-padding: .8em;
+  --icon-color: #c3d3db;
+  --acc-content-color: #edf3f7;
+  --icon-rotate: 90deg;
   --gtr-content: 0fr;
-  --icon-rotate: 0deg;
-  --opacity: 0;
-  border-top: 1px solid #787c81;
+  --acc-panel-margin: 1px;
+  background-color: #fbfbfb;
+  color: #4b5363;
+  box-shadow: rgb(75, 83, 99, 0.2) 0px 8px 24px;
+  margin: 1em;
+  border-radius: 5px;
+}
+
+.accordion-1__panel {
+  /* margin-bottom: var(--acc-panel-margin); */
+  border-bottom: 1px solid black;
   display: grid;
   grid-template-rows: auto var(--gtr-content);
   transition: grid-template-rows 150ms ease-in-out;
 }
 
-.accordion__content>p {
-  font-family: "Open Sans";
-  margin-bottom: .5em;
-  opacity: var(--opacity);
-  color: #4d5156;
-  transition: opacity 150ms ease-in 150ms;
+
+.accordion-1__heading {
+  padding: var(--acc-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.accordion-1__title {
+  font-weight: 400;
+}
 
+.accordion-1__icon {
+  display: block;
+  position: relative;
+  width: 30px;
+  aspect-ratio: 1;
+}
 
-.accordion__panel.open {
+.accordion-1__icon::after,
+.accordion-1__icon::before {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  inset: 0;
+  margin: auto;
+  background-color: var(--icon-color);
+}
+
+.accordion-1__icon::before {
+  transform-origin: center center;
+  rotate: var(--icon-rotate);
+}
+
+.accordion-1:hover {
   --gtr-content: 1fr;
-  --icon-rotate: 180deg;
-  --opacity: 1;
+}
+
+.accordion-1__p {
+  padding: var(--acc-padding);
+}
+
+.accordion-1__content {
+  overflow: hidden;
+  background-color: var(--acc-content-color);
 }
