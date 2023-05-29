@@ -1,26 +1,20 @@
-const accordionHeading = Array.from(document.getElementsByClassName('accordion__heading'));
-const accordionControlsBtn = document.getElementsByClassName('accordion__controls-btn')[0];
+const accordion_1_Btn = Array.from(document.getElementsByClassName('accordion-1-btn'));
 
-let isOpen = false;
-
-accordionHeading.forEach((panelButton) => {
-  panelButton.addEventListener('click', () => {
-    isOpen = !isOpen;
-    const panelToOpen = document.getElementById(panelButton.getAttribute('aria-controls'));
-    togglePanel(panelToOpen);
-    setAccordionAttr(panelButton, panelToOpen, isOpen);
+accordion_1_Btn.forEach((accButton) => {
+  accButton.addEventListener('click', () => {
+    togglePanel(accButton);
   });
-  panelButton.addEventListener('keyup', (e) => {
-    e.key === 'Enter' ? openPanel(panelButton) : '';
+  accButton.addEventListener('keyup', ({ key }) => {
+    key === 'Enter' || key === ' ' ? togglePanel(accButton) : '';
   });
 });
 
-function togglePanel(panel) {
-  panel.classList.toggle('open');
-}
-
-function setAccordionAttr(panelButton, panelToOpen, isOpen) {
-  const targetedPanelContent = document.querySelector(`#${panelToOpen.getAttribute('id')} > .accordion__content`);
-  panelButton.setAttribute('aria-expanded', isOpen);
-  targetedPanelContent.setAttribute('aria-hidden', isOpen);
+function togglePanel(accButton) {
+  const targetPanelId = accButton.getAttribute('aria-controls');
+  const targetPanel = document.getElementById(targetPanelId);
+  const isOpen = targetPanel.classList.contains('open');
+  const panelContent = targetPanel.children[1];
+  targetPanel.classList.toggle('open');
+  accButton.setAttribute('aria-expanded', !isOpen);
+  panelContent.setAttribute('aria-hidden', isOpen);
 }
